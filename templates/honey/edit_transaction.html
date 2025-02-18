@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+
+
+
+{% block content %}
+
+    <h2>Edit Transaction</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="category" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Transaction</button>
+    </form>
+
+{% endblock  %}

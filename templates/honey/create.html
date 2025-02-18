@@ -1,0 +1,43 @@
+{% extends '../base.html' %}
+
+
+
+{% block content %}
+
+    <h2>Create Transaction</h2>
+
+    <div class="card p-5">
+
+        {{message}}
+
+        {% for error in formn.errors.items %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        
+        {% endfor %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+    
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="mb-3">
+                <label for="transaction_type" class="form-label">Category</label>
+                <select class="form-select" id="transaction_type" name="transaction_type" required>
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Transaction</button>
+        </form>
+    </div>
+
+{% endblock  %}
