@@ -1,0 +1,79 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="padding: 10px;">
+                
+                <h3>{{object.title}}</h3>
+
+                <img src="{{object.thumbnail.url}}" alt="" class="card-img-top">
+
+                <hr>
+
+                <p>
+                    <span><i class="fas fa-thumbs-up"></i> {{ object.get_like_count }}</span>
+                    <span><i class="fas fa-eye"></i> {{ object.get_view_count }}</span>
+                    <span><i class="fas fa-comments"></i> {{ object.get_comment_count }}</span>
+
+                </p>
+                <p class="card-text">
+                    posted {{object.published_date|timesince}} ago
+                </p>
+
+                <hr>
+
+                <div style="padding: 10px;">
+                    <p>{{object.content}}</p>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h4>Did you enjoi this post? GIVE US A LIKE</h4>
+
+                    {% comment %} <a href="{{object.get_like_url}}" class="text-muted"> {% endcomment %}
+                        <i class="fas fa-thumbs-up fa-lg"></i>
+                    {% comment %} </a> {% endcomment %}
+                </div>
+
+                <hr>
+
+                {% if request.user.is_authenticated %}
+
+                    <h4>Leave a comment</h4>
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        {{comment_form  }}
+
+                        <button class="btn btn-primary">
+                            Comment
+                        </button>
+                    </form>
+
+                    <h5>comments</h5>
+
+                    {% for comment in  object.comments %}
+
+                        <div>
+                            <p>
+                                {{comment.content}}
+                                <small>{{comment.user.username}} - {{comment.timestamp|timesince}}</small>
+                                <br>
+                            </p>
+                        </div>
+                        <hr>
+                    {% endfor %}
+
+                
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}
