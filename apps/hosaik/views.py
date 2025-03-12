@@ -4,4 +4,8 @@ from django.shortcuts import render
 
 
 def home_view(request):
-    return render(request, './hosaik/home.html')
+    username = request.user.username
+    context = {
+        'username': username
+    }
+    return render(request, './hosaik/home.html', context)

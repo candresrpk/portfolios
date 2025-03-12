@@ -16,11 +16,19 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'honey:home' %}">Honey</a>
           </li>
+          {% if request.patterns == "honey"  %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'honey:transactions' %}">transactions</a>
+            </li>
+          {% endif %}
         </ul>
+
+        
+
         {% comment %} AUTHENTICATION {% endcomment %}
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
 
-            {% if use.is_authenticated %}
+            {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
                 </li>

@@ -1,0 +1,13 @@
+{% extends '../base.html' %}
+
+
+{% block content %}
+
+        <h3>All {{request.user}} transctions</h3>
+    {% for transaction in transactions %}
+    
+        <p>{{transaction.amount}}</p>
+    {% endfor %}
+
+
+{% endblock  %}

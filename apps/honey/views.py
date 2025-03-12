@@ -1,10 +1,24 @@
 from django.shortcuts import render, redirect
 from .forms import TransactionForm
+from .models import Transaction
 # Create your views here.
 
 
 def home_view(request):
+    request.patterns = 'honey'
     return render(request, './honey/home.html')
+
+
+def transactions_list_view(request):
+    request.patterns = 'honey'
+
+    transactions = Transaction.objects.filter(owner=request.user)
+
+    context = {
+        'transactions': transactions
+    }
+
+    return render(request, './honey/transactions.html', context)
 
 
 def create_view(request):
